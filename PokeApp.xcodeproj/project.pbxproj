@@ -26,6 +26,8 @@
 		7381CC4D28C638B800ED2CD1 /* PokeListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7381CC4C28C638B800ED2CD1 /* PokeListPresenter.swift */; };
 		7381CC4F28C6555800ED2CD1 /* PokeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7381CC4E28C6555800ED2CD1 /* PokeTableViewCell.swift */; };
 		7381CC5128C84A3C00ED2CD1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7381CC5028C84A3C00ED2CD1 /* Extensions.swift */; };
+		7381CC5528C867D700ED2CD1 /* PokeCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7381CC5428C867D700ED2CD1 /* PokeCellModel.swift */; };
+		7381CC5728C8742400ED2CD1 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7381CC5628C8742400ED2CD1 /* ProgressView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +71,8 @@
 		7381CC4C28C638B800ED2CD1 /* PokeListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeListPresenter.swift; sourceTree = "<group>"; };
 		7381CC4E28C6555800ED2CD1 /* PokeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeTableViewCell.swift; sourceTree = "<group>"; };
 		7381CC5028C84A3C00ED2CD1 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		7381CC5428C867D700ED2CD1 /* PokeCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeCellModel.swift; sourceTree = "<group>"; };
+		7381CC5628C8742400ED2CD1 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				7328CC0628C5AD7500EC8FAA /* PokeModel.swift */,
+				7381CC5428C867D700ED2CD1 /* PokeCellModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -212,6 +217,7 @@
 			children = (
 				7381CC4428C5BEDD00ED2CD1 /* ClassExtensions.swift */,
 				7381CC5028C84A3C00ED2CD1 /* Extensions.swift */,
+				7381CC5628C8742400ED2CD1 /* ProgressView.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -377,8 +383,10 @@
 				7328CC0328C5A41300EC8FAA /* PokeRepository.swift in Sources */,
 				7381CC4928C638A000ED2CD1 /* PokeListViewController.swift in Sources */,
 				7381CC4F28C6555800ED2CD1 /* PokeTableViewCell.swift in Sources */,
+				7381CC5528C867D700ED2CD1 /* PokeCellModel.swift in Sources */,
 				7381CC4D28C638B800ED2CD1 /* PokeListPresenter.swift in Sources */,
 				7328CBFA28C58D1E00EC8FAA /* PokeFactory.swift in Sources */,
+				7381CC5728C8742400ED2CD1 /* ProgressView.swift in Sources */,
 				7328CBFF28C5935600EC8FAA /* PokePresenter.swift in Sources */,
 				7381CC5128C84A3C00ED2CD1 /* Extensions.swift in Sources */,
 			);
