@@ -7,14 +7,13 @@
 
 import UIKit
 
-protocol PokeListViewControllerProtocol: AnyObject {
+protocol PokeListViewControllerProtocol: PokeViewControllerBaseProtocol, AnyObject {
     
 }
 
 class PokeListViewController: PokeViewController {
     var interactor: PokeListInteractorProtocol?
-    var pokeModel: PokeModel?
-    var pokeList: [Any]?
+    var pokeList: [PokeCellModel]?
     
     private lazy var tableView: UITableView = {
         var tableView = UITableView()
@@ -46,17 +45,18 @@ extension PokeListViewController: PokeListViewControllerProtocol {
 
 extension PokeListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 60
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return pokeList?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? PokeTableViewCell, let poke = pokeModel else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? PokeTableViewCell,
+              let poke = pokeList?[indexPath.row] else { return UITableViewCell() }
         
-        cell.configureCell(image: UIImage(), description: poke.name ?? "")
+        cell.configureCell(image: UIImage(named: "icon") ?? UIImage(), description: poke.description ?? "")
         
         return cell
     }

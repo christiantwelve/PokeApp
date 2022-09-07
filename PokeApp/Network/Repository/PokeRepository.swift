@@ -9,59 +9,67 @@ import UIKit
 
 class PokeRepository {
     private static let baseURL = "https://pokeapi.co/api/v2/"
+    private static let pokemonURLComponent = "pokemon/"
     
-    static func searchPokeByID(id: Int, success: @escaping (PokeModel, UIImage) -> Void, failure: @escaping (Error) -> Void) {
-        guard let url = URL(string: baseURL + "pokemon/" + String(id)) else { return }
+    private static func request(to url: String, completion: @escaping (Data) -> Void, failure: @escaping (String) -> Void) {
+        guard let url = URL(string: url.contains("https://raw.githubusercontent.com") ? url : baseURL + url) else { return }
         let t = URLSession.shared.dataTask(with: url) { data, _, error in
-            guard let data = data, let pokeModel = try? JSONDecoder().decode(PokeModel.self, from: data) else {
-                if let error = error {
-                    failure(error)
-                }
+            guard let data = data else {
+                failure(error?.localizedDescription ?? "Error")
                 return
             }
-            getPicture(url: pokeModel.sprites?.other?.home?.frontDefault ?? "") { image in
-                success(pokeModel, image)
-            } failure: { error in
-                failure(error)
-            }
+            completion(data)
         }
         t.resume()
     }
     
-    static func searchPokeByName(name: String, success: @escaping (PokeModel, UIImage) -> Void, failure: @escaping (String) -> Void) {
-        guard let url = URL(string: baseURL + "pokemon/" + name) else { return }
-        let t = URLSession.shared.dataTask(with: url) { data, _, error in
-            guard let data = data else {
-                if let error = error {
-                    failure(error.localizedDescription)
-                }
-                return
-            }
+    static func searchPokeByID(id: Int, success: @escaping (PokeModel, UIImage) -> Void, failure: @escaping (String) -> Void) {
+        request(to: pokemonURLComponent + String(id)) { data in
             if let pokeModel = try? JSONDecoder().decode(PokeModel.self, from: data) {
                 getPicture(url: pokeModel.sprites?.other?.home?.frontDefault ?? "") { image in
                     success(pokeModel, image)
                 } failure: { error in
-                    failure(error.localizedDescription)
-                }
-            } else {
-                failure("I found a error when I try to decode")
-            }
-        }
-        t.resume()
-    }
-    
-    static func getPicture(url: String, success: @escaping (UIImage) -> Void, failure: @escaping (Error) -> Void) {
-        guard let url = URL(string: url) else { return }
-        
-        let t = URLSession.shared.dataTask(with: url) { data, _, error in
-            guard let data = data, let image = UIImage(data: data) else {
-                if let error = error {
                     failure(error)
                 }
+            } else {
+                failure("I found a error when I tried collect the poke information")
+            }
+        } failure: { error in
+            failure(error)
+        }
+    }
+    
+    static func searchPokeByName(name: String?, id: Int?, success: @escaping (PokeModel, UIImage) -> Void, failure: @escaping (String) -> Void) {
+        var url: String?
+        if let name = name {
+            url = pokemonURLComponent + name
+        } else if let id = id {
+            url = pokemonURLComponent + String(id)
+        }
+        request(to: url ?? "") { data in
+            if let pokeModel = try? JSONDecoder().decode(PokeModel.self, from: data) {
+                getPicture(url: pokeModel.sprites?.other?.home?.frontDefault ?? "") { image in
+                    success(pokeModel, image)
+                } failure: { error in
+                    failure(error)
+                }
+            } else {
+                failure("I found a error when I tried collect the poke information")
+            }
+        } failure: { error in
+            failure(error)
+        }
+    }
+    
+    static func getPicture(url: String, success: @escaping (UIImage) -> Void, failure: @escaping (String) -> Void) {
+        request(to: url) { data in
+            guard let image = UIImage(data: data) else {
+                failure("Unable to create UIImage with Data")
                 return
             }
             success(image)
+        } failure: { error in
+            failure(error)
         }
-        t.resume()
     }
 }
