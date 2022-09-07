@@ -5,7 +5,7 @@ You'll see the picture and the name, and if you want more detail, just tap on to
 
 If you liked the pokemon you searched for, click on the icon with a heart to save it as a favorite.
 
-The app will save your poke in this webook:
+The app will save your poke in this webhook:
 
 webhookAddress: https://webhook.site/#!/9b896056-bede-43e8-b223-a5cffb7e9e8c/228cf4ae-c71a-4ade-9058-da6e917f59de/1
 
