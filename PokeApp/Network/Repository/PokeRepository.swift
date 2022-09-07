@@ -42,22 +42,6 @@ class PokeRepository {
         d.resume()
     }
     
-    static func searchPokeByID(id: Int, success: @escaping (PokeModel, UIImage) -> Void, failure: @escaping (String) -> Void) {
-        request(to: pokemonURLComponent + String(id)) { data in
-            if let pokeModel = try? JSONDecoder().decode(PokeModel.self, from: data) {
-                getPicture(url: pokeModel.sprites?.other?.home?.frontDefault ?? "") { image in
-                    success(pokeModel, image)
-                } failure: { error in
-                    failure(error)
-                }
-            } else {
-                failure("I found a error when I tried collect the poke information")
-            }
-        } failure: { error in
-            failure(error)
-        }
-    }
-    
     static func searchPokeByName(name: String?, id: Int?, success: @escaping (PokeModel, UIImage) -> Void, failure: @escaping (String) -> Void) {
         var url: String?
         if let name = name {

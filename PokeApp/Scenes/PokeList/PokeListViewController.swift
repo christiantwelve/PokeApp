@@ -29,6 +29,7 @@ class PokeListViewController: PokeViewController {
         super.viewDidLoad()
         
         setupView()
+        interactor?.getPictureDetail(pokes: pokeList)
     }
     
     private func setupView() {

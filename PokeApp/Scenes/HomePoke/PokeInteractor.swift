@@ -42,7 +42,7 @@ class PokeInteractor: PokeInteratorProtocol {
         self.presenter?.presentLoading(showLoading: true)
         PokeRepository.postRequest(with: poke) { [weak self] didPost in
             self?.presenter?.presentLoading(showLoading: false)
-            
+            self?.presenter?.presentFavorite(success: didPost)
         } failure: { [weak self] error in
             self?.presenter?.presentLoading(showLoading: false)
             self?.presenter?.presentError(error: error)

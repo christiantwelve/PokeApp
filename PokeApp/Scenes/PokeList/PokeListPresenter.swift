@@ -8,10 +8,13 @@
 import Foundation
 
 protocol PokeListPresenterProtocol {
-    
+    func presentError(error: String)
 }
 
 class PokeListPresenter: PokeListPresenterProtocol {
     weak var viewController: PokeListViewControllerProtocol?
     
+    func presentError(error: String) {
+        self.viewController?.showError(error: error)
+    }
 }

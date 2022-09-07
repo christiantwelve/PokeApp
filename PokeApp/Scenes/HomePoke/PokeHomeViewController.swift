@@ -41,7 +41,7 @@ class PokeHomeViewController: PokeViewController {
         button.backgroundColor = .systemYellow
         button.setImage(UIImage(systemName: "heart"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showTextField)))
+        button.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(markFavorite)))
         return button
     }()
     private lazy var searchButton: UIButton = {
@@ -176,7 +176,9 @@ extension PokeHomeViewController: UITextFieldDelegate {
         if !searchTextField.isHidden {
             showTextField()
         }
-        interactor?.getMainPoke(name: (textField.text ?? "").lowercased(), id: nil)
+        guard let text = textField.text else { return textField.resignFirstResponder()}
+        let textToSearch = text.trimmingCharacters(in: .whitespaces)
+        interactor?.getMainPoke(name: textToSearch.lowercased(), id: nil)
         return textField.resignFirstResponder()
     }
 }
