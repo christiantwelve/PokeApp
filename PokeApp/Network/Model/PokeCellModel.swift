@@ -10,4 +10,5 @@ import UIKit
 struct PokeCellModel {
     var description: String?
     var image: String?
+    var contentImage: UIImage?
 }

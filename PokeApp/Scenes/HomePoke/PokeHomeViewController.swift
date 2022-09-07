@@ -133,17 +133,12 @@ class PokeHomeViewController: PokeViewController {
     @objc func showTextField() {
         DispatchQueue.main.async {
             self.searchTextField.isHidden = !self.searchTextField.isHidden
+            let _ = !self.searchTextField.isHidden ? self.searchTextField.becomeFirstResponder() : self.searchTextField.resignFirstResponder()
         }
     }
     
     @objc func menuTapped() {
-        var cellData: [PokeCellModel] {
-            return [PokeCellModel(description: "Generation I", image: pokeModel?.sprites?.versions?.generationI?.yellow?.frontDefault),
-                    PokeCellModel(description: "Generation II", image: pokeModel?.sprites?.versions?.generationIi?.crystal?.frontDefault),
-                    PokeCellModel(description: "Generation VII", image: pokeModel?.sprites?.versions?.generationVii?.icons?.frontDefault),
-                    PokeCellModel(description: "Generation V", image: pokeModel?.sprites?.versions?.generationV?.blackWhite?.frontDefault)]
-        }
-        navigationController?.pushViewController(PokeFactory.getPokeListViewController(poke: cellData), animated: true)
+        navigationController?.pushViewController(PokeFactory.getPokeListViewController(poke: pokeModel), animated: true)
     }
 }
 
@@ -177,7 +172,7 @@ extension PokeHomeViewController: UITextFieldDelegate {
             showTextField()
         }
         guard let text = textField.text else { return textField.resignFirstResponder()}
-        let textToSearch = text.trimmingCharacters(in: .whitespaces)
+        let textToSearch = text.trimmingCharacters(in: .whitespaces).replacingOccurrences(of: " ", with: "")
         interactor?.getMainPoke(name: textToSearch.lowercased(), id: nil)
         return textField.resignFirstResponder()
     }

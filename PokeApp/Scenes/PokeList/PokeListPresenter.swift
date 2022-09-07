@@ -9,6 +9,8 @@ import Foundation
 
 protocol PokeListPresenterProtocol {
     func presentError(error: String)
+    func presentPokeList(pokes: [PokeCellModel]?)
+    func presentLoading(showLoading: Bool)
 }
 
 class PokeListPresenter: PokeListPresenterProtocol {
@@ -16,5 +18,13 @@ class PokeListPresenter: PokeListPresenterProtocol {
     
     func presentError(error: String) {
         self.viewController?.showError(error: error)
+    }
+    
+    func presentPokeList(pokes: [PokeCellModel]?) {
+        self.viewController?.showPokeList(pokes: pokes)
+    }
+    
+    func presentLoading(showLoading: Bool) {
+        self.viewController?.showLoading(showLoading)
     }
 }

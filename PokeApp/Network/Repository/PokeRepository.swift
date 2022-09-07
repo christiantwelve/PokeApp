@@ -57,7 +57,7 @@ class PokeRepository {
                     failure(error)
                 }
             } else {
-                failure("I found a error when I tried collect the poke information")
+                failure("Sorry, we searched for ➡️ " + (name ?? "") + " ⬅️ and we didn't find anything")
             }
         } failure: { error in
             failure(error)

@@ -8,20 +8,37 @@
 import Foundation
 
 protocol PokeListInteractorProtocol {
-    func getPictureDetail(pokes: [PokeCellModel]?)
+    func getPictures(pokes: PokeModel?)
 }
 
 class PokeListInteractor: PokeListInteractorProtocol {
     var presenter: PokeListPresenterProtocol?
-    var pokeList: [PokeCellModel]?
+    var pokeList = [PokeCellModel]()
+    var pokeGenerationCount = 0
     
-    func getPictureDetail(pokes: [PokeCellModel]?) {
-        guard let pokes = pokes else { return }
-        for poke in pokes {
-            PokeRepository.getPicture(url: poke.image ?? "") { image in
+    func getPictures(pokes: PokeModel?) {
+        var picturesToDownload: [String?] {
+            return [pokes?.sprites?.versions?.generationI?.yellow?.frontDefault,
+                    pokes?.sprites?.versions?.generationIi?.crystal?.frontDefault,
+                    pokes?.sprites?.versions?.generationVii?.icons?.frontDefault,
+                    pokes?.sprites?.versions?.generationV?.blackWhite?.frontDefault,
+                    pokes?.sprites?.versions?.generationViii?.icons?.frontDefault]
+        }
+        
+        ///for each picture address in this array, we download the picture
+        for picture in picturesToDownload {
+            presenter?.presentLoading(showLoading: true)
+            pokeGenerationCount = pokeGenerationCount + 1
+            let name = "Generation " + String(pokeGenerationCount)
+            
+            PokeRepository.getPicture(url: picture ?? "") { [weak self] image in
+                self?.presenter?.presentLoading(showLoading: false)
+                self?.pokeList.append(PokeCellModel(description: name, contentImage: image))
                 
-            } failure: { string in
-                
+                self?.presenter?.presentPokeList(pokes: self?.pokeList)
+            } failure: { [weak self] error in
+                self?.presenter?.presentLoading(showLoading: false)
+                self?.presenter?.presentError(error: error)
             }
         }
     }

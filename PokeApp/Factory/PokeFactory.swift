@@ -18,7 +18,7 @@ class PokeFactory {
         return viewController
     }
     
-    static func getPokeListViewController(poke: [PokeCellModel]) -> UIViewController {
+    static func getPokeListViewController(poke: PokeModel?) -> UIViewController {
         let viewController = PokeListViewController()
         let presenter = PokeListPresenter()
         let interator = PokeListInteractor()
@@ -26,7 +26,7 @@ class PokeFactory {
         viewController.interactor = interator
         presenter.viewController = viewController
         
-        viewController.pokeList = poke
+        viewController.pokeModel = poke
         
         return viewController
     }
