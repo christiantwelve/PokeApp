@@ -28,6 +28,8 @@
 		7381CC5128C84A3C00ED2CD1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7381CC5028C84A3C00ED2CD1 /* Extensions.swift */; };
 		7381CC5528C867D700ED2CD1 /* PokeCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7381CC5428C867D700ED2CD1 /* PokeCellModel.swift */; };
 		7381CC5728C8742400ED2CD1 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7381CC5628C8742400ED2CD1 /* ProgressView.swift */; };
+		7381CC5928C8FE7E00ED2CD1 /* PokeHomeViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7381CC5828C8FE7E00ED2CD1 /* PokeHomeViewControllerTest.swift */; };
+		7381CC5B28C90D4800ED2CD1 /* PokeListViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7381CC5A28C90D4800ED2CD1 /* PokeListViewControllerTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +75,8 @@
 		7381CC5028C84A3C00ED2CD1 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		7381CC5428C867D700ED2CD1 /* PokeCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeCellModel.swift; sourceTree = "<group>"; };
 		7381CC5628C8742400ED2CD1 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		7381CC5828C8FE7E00ED2CD1 /* PokeHomeViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeHomeViewControllerTest.swift; sourceTree = "<group>"; };
+		7381CC5A28C90D4800ED2CD1 /* PokeListViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeListViewControllerTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +139,8 @@
 			isa = PBXGroup;
 			children = (
 				7328CBDB28C58A7F00EC8FAA /* PokeAppTests.swift */,
+				7381CC5828C8FE7E00ED2CD1 /* PokeHomeViewControllerTest.swift */,
+				7381CC5A28C90D4800ED2CD1 /* PokeListViewControllerTest.swift */,
 			);
 			path = PokeAppTests;
 			sourceTree = "<group>";
@@ -396,7 +402,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7381CC5928C8FE7E00ED2CD1 /* PokeHomeViewControllerTest.swift in Sources */,
 				7328CBDC28C58A7F00EC8FAA /* PokeAppTests.swift in Sources */,
+				7381CC5B28C90D4800ED2CD1 /* PokeListViewControllerTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

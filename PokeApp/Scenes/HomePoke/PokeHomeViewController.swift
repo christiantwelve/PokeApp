@@ -100,13 +100,13 @@ class PokeHomeViewController: PokeViewController {
         pokeNameLabel.topAnchor.constraint(equalTo: pokeImageView.bottomAnchor, constant: 20).isActive = true
         
         favoriteButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100).isActive = true
-        favoriteButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -3).isActive = true
+        favoriteButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -3).isActive = true
         favoriteButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
         favoriteButton.widthAnchor.constraint(equalToConstant: 48).isActive = true
         
         
         searchButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 200).isActive = true
-        searchButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -3).isActive = true
+        searchButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -3).isActive = true
         searchButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
         searchButton.widthAnchor.constraint(equalToConstant: 48).isActive = true
         
