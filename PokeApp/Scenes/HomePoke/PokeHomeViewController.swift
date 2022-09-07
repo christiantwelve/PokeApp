@@ -9,6 +9,7 @@ import UIKit
 
 protocol PokeHomeViewControllerProtocol: PokeViewControllerBaseProtocol, AnyObject {
     func showPoke(poke: PokeModel, image: UIImage)
+    func showFavorite(success: Bool)
 }
 
 class PokeHomeViewController: PokeViewController {
@@ -31,6 +32,17 @@ class PokeHomeViewController: PokeViewController {
         let label = PokeTitleLabel()
         self.view.addSubview(label)
         return label
+    }()
+    private lazy var favoriteButton: UIButton = {
+        let button = UIButton()
+        self.view.addSubview(button)
+        button.tintColor = .label
+        button.layer.cornerRadius = 25
+        button.backgroundColor = .systemYellow
+        button.setImage(UIImage(systemName: "heart"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showTextField)))
+        return button
     }()
     private lazy var searchButton: UIButton = {
         let button = UIButton()
@@ -73,7 +85,7 @@ class PokeHomeViewController: PokeViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        showLoading(true)
+        
         interactor?.getMainPoke(name: "bulbasaur", id: nil)
     }
     
@@ -86,6 +98,11 @@ class PokeHomeViewController: PokeViewController {
         pokeNameLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
         pokeNameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
         pokeNameLabel.topAnchor.constraint(equalTo: pokeImageView.bottomAnchor, constant: 20).isActive = true
+        
+        favoriteButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100).isActive = true
+        favoriteButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -3).isActive = true
+        favoriteButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
+        favoriteButton.widthAnchor.constraint(equalToConstant: 48).isActive = true
         
         
         searchButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 200).isActive = true
@@ -106,6 +123,13 @@ class PokeHomeViewController: PokeViewController {
          }
     }
     
+    @objc func markFavorite() {
+        guard let pokeModel = pokeModel else {
+            return
+        }
+        interactor?.postPoke(poke: pokeModel)
+    }
+    
     @objc func showTextField() {
         DispatchQueue.main.async {
             self.searchTextField.isHidden = !self.searchTextField.isHidden
@@ -124,13 +148,19 @@ class PokeHomeViewController: PokeViewController {
 }
 
 extension PokeHomeViewController: PokeHomeViewControllerProtocol {
+    func showFavorite(success: Bool) {
+        DispatchQueue.main.async {
+            self.favoriteButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            UIAlertController.customAlert(title: "Saved", message: "We saved your poke as favorite", controller: self)
+        }
+    }
+    
     func showPoke(poke: PokeModel, image: UIImage) {
         DispatchQueue.main.async {
             self.pokeNameLabel.text = poke.name
             self.pokeImageView.image = image
         }
         pokeModel = poke
-        showLoading(false)
     }
 }
 
@@ -146,9 +176,7 @@ extension PokeHomeViewController: UITextFieldDelegate {
         if !searchTextField.isHidden {
             showTextField()
         }
-
         interactor?.getMainPoke(name: (textField.text ?? "").lowercased(), id: nil)
-        
         return textField.resignFirstResponder()
     }
 }

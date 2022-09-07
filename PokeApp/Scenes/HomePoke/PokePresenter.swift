@@ -10,7 +10,9 @@ import UIKit
 
 protocol PokePresenterProtocol {
     func presentPoke(poke: PokeModel, image: UIImage)
+    func presentFavorite(success: Bool)
     func presentError(error: String)
+    func presentLoading(showLoading: Bool)
 }
 
 class PokePresenter: PokePresenterProtocol {
@@ -22,5 +24,13 @@ class PokePresenter: PokePresenterProtocol {
     
     func presentError(error: String) {
         viewController?.showError(error: error)
+    }
+    
+    func presentLoading(showLoading: Bool) {
+        viewController?.showLoading(showLoading)
+    }
+    
+    func presentFavorite(success: Bool) {
+        viewController?.showFavorite(success: success)
     }
 }
